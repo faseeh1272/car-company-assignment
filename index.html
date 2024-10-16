@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Companies & Products</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .company-name {
+            font-weight: bold;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="result"></div>
+
+    <script>
+        // Array of car companies with their vehicles
+        const carCompanies = [
+            {
+                name: "Tesla",
+                products: [
+                    { name: "Model S", price: 89999, unitsSold: 50000 },
+                    { name: "Model 3", price: 39999, unitsSold: 120000 },
+                    { name: "Model X", price: 99999, unitsSold: 35000 }
+                ]
+            },
+            {
+                name: "Toyota",
+                products: [
+                    { name: "Corolla", price: 20000, unitsSold: 300000 },
+                    { name: "Camry", price: 25000, unitsSold: 200000 },
+                    { name: "Prius", price: 24000, unitsSold: 150000 }
+                ]
+            },
+            {
+                name: "Ford",
+                products: [
+                    { name: "F-150", price: 35000, unitsSold: 500000 },
+                    { name: "Mustang", price: 55000, unitsSold: 80000 },
+                    { name: "Explorer", price: 42000, unitsSold: 100000 }
+                ]
+            }
+        ];
+
+        // Function to display the car companies and vehicle data in a table
+        function displayCarCompanies() {
+            const resultDiv = document.getElementById('result');
+
+            carCompanies.forEach(company => {
+                // Create a table for each company
+                const table = document.createElement('table');
+                const companyName = document.createElement('h2');
+                companyName.classList.add('company-name');
+                companyName.textContent = company.name;
+
+                // Table headers
+                const tableHeader = `
+                    <tr>
+                        <th>Vehicle Name</th>
+                        <th>Price</th>
+                        <th>Units Sold</th>
+                    </tr>
+                `;
+                table.innerHTML = tableHeader;
+
+                // Table rows for each vehicle
+                company.products.forEach(product => {
+                    const row = `
+                        <tr>
+                            <td>${product.name}</td>
+                            <td>$${product.price.toLocaleString()}</td>
+                            <td>${product.unitsSold.toLocaleString()}</td>
+                        </tr>
+                    `;
+                    table.innerHTML += row;
+                });
+
+                // Append company name and table to the result div
+                resultDiv.appendChild(companyName);
+                resultDiv.appendChild(table);
+            });
+        }
+
+        // Call the function to display the car companies and products
+        displayCarCompanies();
+    </script>
+
+</body>
+</html>
